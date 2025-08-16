@@ -4,6 +4,4 @@ if not ok then
     return
 end
 
-require("theo.lsp.mason")
-require("theo.lsp.handlers").setup()
-require("theo.lsp.null-ls")
+require("theo.lsp.config").setup()

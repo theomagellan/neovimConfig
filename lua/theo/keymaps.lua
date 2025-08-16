@@ -21,10 +21,10 @@ vim.g.maplocalleader = " "
 --------------------------------------------------NORMAL--------------------------------------------------
 
 -- Window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-d>", "<C-w>h", opts)
+keymap("n", "<C-n>", "<C-w>l", opts)
+keymap("n", "<C-t>", "<C-w>k", opts)
+keymap("n", "<C-h>", "<C-w>j", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -38,7 +38,7 @@ local themes = require('telescope.themes')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '"', builtin.registers, {})
+-- vim.keymap.set('n', '"', builtin.registers, {})
 keymap('n', '<leader>ld', ":Telescope diagnostics bufnr=0 theme=dropdown<CR>", opts)
 keymap("n", "<leader>ln", ":Telescope notify<CR>", opts)
 
@@ -51,4 +51,4 @@ keymap("n", "<S-h>", "gT", opts)
 keymap("n", "<S-b>", ":BufferLinePick<CR>", opts)
 
 -- toggleterm
- -- keymap("n", "<C-Space>", ":ToggleTerm direction=float<CR>", opts)
+-- keymap("n", "<C-Space>", ":ToggleTerm direction=float<CR>", opts)

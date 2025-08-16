@@ -3,6 +3,10 @@ if not status_ok then
     return
 end
 
+vim.diagnostic.config({
+    update_in_insert = true,
+})
+
 bufferline.setup({
     options = {
         mode = "tabs",
@@ -34,7 +38,7 @@ bufferline.setup({
         max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
         tab_size = 21,
         diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
-        diagnostics_update_in_insert = true,
+        --diagnostics_update_in_insert = true,
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local icon = level:match("error") and " " or " "
             return " " .. icon .. count

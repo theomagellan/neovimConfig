@@ -12,6 +12,7 @@ end
 local ok, cmp = pcall(require, "cmp")
 if not ok then
     vim.notify("autopairs.lua: could not load cmp module")
+    return
 end
 
 cmp.event:on(

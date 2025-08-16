@@ -1,16 +1,6 @@
 local M = {}
 
 M.setup = function()
-    local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
-    }
-
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
 
     local config = {
         --    virtual_text = {
@@ -19,7 +9,12 @@ M.setup = function()
         virtual_text = false,
         -- show signs
         signs = {
-            active = signs,
+            text = {
+                [vim.diagnostic.severity.ERROR] = ' ',
+                [vim.diagnostic.severity.WARN] = ' ',
+                [vim.diagnostic.severity.HINT] = ' ',
+                [vim.diagnostic.severity.INFO] = ' ',
+            },
         },
         update_in_insert = true,
         underline = true,
@@ -46,20 +41,6 @@ M.setup = function()
     })
 end
 
-local function lsp_highlight_document(client)
-    -- Set autocommands conditional on server_capabilities
-    vim.api.nvim_exec2(
-        [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-        false
-    )
-end
-
 local lspactions_ok, lspactions = pcall(require, "lspactions")
 if lspactions_ok then
     vim.ui.input = lspactions.input
@@ -76,6 +57,7 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>qf", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>h", ":ClangdSwitchSourceHeader<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
@@ -89,7 +71,6 @@ M.on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
     end
     lsp_keymaps(bufnr)
-    lsp_highlight_document(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

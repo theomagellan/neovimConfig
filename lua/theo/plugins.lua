@@ -22,6 +22,7 @@ return packer.startup(function(use)
     use("windwp/nvim-autopairs") -- autopair plugin (highly customizable!)
     use("kylechui/nvim-surround") -- cool plugin to surround text
     use("catppuccin/nvim") -- theme
+    use('nyoom-engineering/oxocarbon.nvim') -- theme
     use("Pocco81/auto-save.nvim") --autosave
     use("akinsho/bufferline.nvim") -- cuter tabs
     use("akinsho/toggleterm.nvim") -- toggleterm
@@ -43,7 +44,6 @@ return packer.startup(function(use)
 
     -- LSP
     use("neovim/nvim-lspconfig") -- LSP engine
-    use("williamboman/mason.nvim") -- LSP installer
     use("williamboman/mason-lspconfig.nvim") -- LSP installer
     use("jose-elias-alvarez/null-ls.nvim") -- linters/formatters
     use("RishabhRD/lspactions") --better UX
@@ -55,23 +55,19 @@ return packer.startup(function(use)
     -- telescope plugins
     use({
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.3",
         requires = { { "nvim-lua/plenary.nvim" } }, -- telescope
     })
-    use({
-        "nvim-telescope/telescope-fzf-native.nvim",
-        run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release &&"
-            .. " cmake --build build --config Release &&"
-            .. " cmake --install build --prefix build",
-    })
+   use({
+       "nvim-telescope/telescope-fzf-native.nvim",
+       run = "cmake -s. -bbuild -dcmake_build_type=release && cmake --build build --config release"
+   })
 
     -- treesitter plugins
     use({
         "nvim-treesitter/nvim-treesitter", -- treesitter
         run = ":TSUpdate",
     })
-    use("p00f/nvim-ts-rainbow") -- rainbow brackets
-
+    use("HiPhish/rainbow-delimiters.nvim")
     -- NvimTree
     use("kyazdani42/nvim-tree.lua") -- file explorer
     use("kyazdani42/nvim-web-devicons") -- devicons (requires a nerdfont!)
