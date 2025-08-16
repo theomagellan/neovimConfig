@@ -1,81 +1,63 @@
-local ok, packer = pcall(require, "packer")
-if not ok then
-    vim.notify('require("packer") failed! is it installed?')
+vim.api.nvim_create_autocmd('PackChanged', { callback = function(args) 
+  local spec = args.data.spec
+
+  if spec == nil then
     return
-end
+  end
 
-packer.init({
-    display = {
-        open_fn = function()
-            return require("packer.util").float({ border = "rounded" })
-        end,
-    },
+  local path = args.data.path
+
+  if spec.name == "treesitter" then
+      vim.cmd("TSUpdate")
+  end
+
+  if spec.name == "fzf-native" then
+    vim.cmd("! cd " .. path .. " && make")
+  end
+
+end })
+
+vim.pack.add({
+  "https://github.com/nvim-lua/popup.nvim", -- An implementation of the Popup API from vim in Neovim,
+  "https://github.com/nvim-lua/plenary.nvim", -- Useful lua functions used in lots of plugins
+  "https://github.com/rcarriga/nvim-notify", -- better notification system
+  "https://github.com/windwp/nvim-autopairs", -- autopair plugin (highly customizable!)
+  "https://github.com/kylechui/nvim-surround", -- cool plugin to surround text
+  "https://github.com/catppuccin/nvim", -- theme
+  "https://github.com/Pocco81/auto-save.nvim", --autosave
+  "https://github.com/akinsho/bufferline.nvim", -- cuter tabs
+  "https://github.com/akinsho/toggleterm.nvim", -- toggleterm
+  "https://github.com/m4xshen/smartcolumn.nvim", -- columns appear/disappear
+  -- lualine
+  "https://github.com/nvim-lualine/lualine.nvim", -- lualine
+
+  -- cmp plugins
+  "https://github.com/hrsh7th/nvim-cmp", -- The completion plugin
+  "https://github.com/hrsh7th/cmp-buffer", -- buffer completions
+  "https://github.com/hrsh7th/cmp-path", -- path completions
+  "https://github.com/hrsh7th/cmp-cmdline", -- cmdline completions
+  "https://github.com/saadparwaiz1/cmp_luasnip", -- snippet completions
+  "https://github.com/hrsh7th/cmp-nvim-lsp", -- LSP snippet support
+
+  -- LSP
+  "https://github.com/neovim/nvim-lspconfig", -- LSP engine
+  "https://github.com/williamboman/mason-lspconfig.nvim", -- LSP installer
+  "https://github.com/RishabhRD/lspactions", --better UX
+
+  -- snippets
+  "https://github.com/L3MON4D3/LuaSnip", --snippet engine
+  "https://github.com/rafamadriz/friendly-snippets", -- a bunch of snippets to use
+
+  -- telescope plugins
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  {src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", name = "fzf-native"},
+
+  -- treesitter plugins
+  {src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter"}, -- treesitter
+  "https://github.com/HiPhish/rainbow-delimiters.nvim",
+
+  -- NvimTree
+  "https://github.com/kyazdani42/nvim-tree.lua", -- file explorer
+  "https://github.com/kyazdani42/nvim-web-devicons", -- devicons (requires a nerdfont!)
 })
-
--- plugins go here
-return packer.startup(function(use)
-    -- misceallenous
-    use("wbthomason/packer.nvim") -- Have packer manage itself
-    use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-    use("nvim-lua/plenary.nvim") -- Useful lua functions used in lots of plugins
-    use("rcarriga/nvim-notify") -- better notification system
-    use("windwp/nvim-autopairs") -- autopair plugin (highly customizable!)
-    use("kylechui/nvim-surround") -- cool plugin to surround text
-    use("catppuccin/nvim") -- theme
-    use('nyoom-engineering/oxocarbon.nvim') -- theme
-    use("Pocco81/auto-save.nvim") --autosave
-    use("akinsho/bufferline.nvim") -- cuter tabs
-    use("akinsho/toggleterm.nvim") -- toggleterm
-    use("m4xshen/smartcolumn.nvim") -- columns appear/disappear
-    -- lualine
-    use("nvim-lualine/lualine.nvim") -- lualine
-
-    -- cmp plugins
-    use("hrsh7th/nvim-cmp") -- The completion plugin
-    use("hrsh7th/cmp-buffer") -- buffer completions
-    use("hrsh7th/cmp-path") -- path completions
-    use("hrsh7th/cmp-cmdline") -- cmdline completions
-    use("saadparwaiz1/cmp_luasnip") -- snippet completions
-    use("hrsh7th/cmp-nvim-lsp") -- LSP snippet support
-    use({
-        "hrsh7th/cmp-nvim-lua", -- completion for nvim config
-        opt = true,
-    }) -- lazy loading bc it's occasionnally used
-
-    -- LSP
-    use("neovim/nvim-lspconfig") -- LSP engine
-    use("williamboman/mason-lspconfig.nvim") -- LSP installer
-    use("jose-elias-alvarez/null-ls.nvim") -- linters/formatters
-    use("RishabhRD/lspactions") --better UX
-
-    -- snippets
-    use("L3MON4D3/LuaSnip") --snippet engine
-    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
-    -- telescope plugins
-    use({
-        "nvim-telescope/telescope.nvim",
-        requires = { { "nvim-lua/plenary.nvim" } }, -- telescope
-    })
-   use({
-       "nvim-telescope/telescope-fzf-native.nvim",
-       run = "cmake -s. -bbuild -dcmake_build_type=release && cmake --build build --config release"
-   })
-
-    -- treesitter plugins
-    use({
-        "nvim-treesitter/nvim-treesitter", -- treesitter
-        run = ":TSUpdate",
-    })
-    use("HiPhish/rainbow-delimiters.nvim")
-    -- NvimTree
-    use("kyazdani42/nvim-tree.lua") -- file explorer
-    use("kyazdani42/nvim-web-devicons") -- devicons (requires a nerdfont!)
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    ---@diagnostic disable-next-line: undefined-global
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
-end)

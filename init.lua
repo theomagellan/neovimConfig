@@ -1,8 +1,8 @@
 require("theo.options") -- loads in options
+require("theo.plugins") -- installs plugins
 
 require("theo.keymaps") -- loads in keybindings
 require("theo.notify") -- changes notification system if plugin is installed
-require("theo.plugins") -- loads in packer and installs plugins
 require("theo.colorscheme") -- loads in colorscheme and settings
 require("theo.autopairs") -- loads in auto-pairs with settings
 require("theo.surround") -- loads in surround
