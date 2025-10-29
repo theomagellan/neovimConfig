@@ -26,7 +26,7 @@ for _, server in pairs(servers) do
         opts = vim.tbl_deep_extend("force", {}, opts)
     end
 
-    lspconfig[server].setup(opts)
+    vim.lsp.enable(server, opts)
 end
 
 return {setup = handlers.setup}
