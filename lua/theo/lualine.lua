@@ -11,7 +11,7 @@ local diagnostics = {
     --   'coc', 'ale', 'vim_lsp'.
     -- or a function that returns a table as such:
     --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-    sources = { "nvim_lsp" },
+    sources = { "nvim_diagnostic" },
 
     -- Displays diagnostics for the defined severity types
     sections = { "error", "warn" }, --, "info", "hint" },
@@ -65,7 +65,7 @@ lualine.setup({
     },
     sections = {
         lualine_a = { datetime },
-        lualine_b = { "branch", diagnostics, whitespaces },
+        lualine_b = { "branch", diagnostics },
         lualine_c = { "filename" },
         lualine_x = { "fileformat", filetype },
         lualine_y = { "progress" },
