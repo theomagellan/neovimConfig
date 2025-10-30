@@ -20,7 +20,7 @@ end
 --     autopairs = {enable = true},
 -- })
 
-local languages = { 'go', 'python', 'lua', 'yaml', 'json', 'rust', 'cpp', 'c' }
+local languages = { 'go', 'python', 'lua', 'yaml', 'json', 'rust', 'cpp', 'c', 'swift' }
 
 treesitter.install(languages)
 
