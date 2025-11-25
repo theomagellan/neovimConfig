@@ -1,5 +1,7 @@
 local servers = {
     "clangd",
+    "gopls",
+    "golangci-lint-langserver"
 }
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")

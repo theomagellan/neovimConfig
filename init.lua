@@ -15,3 +15,4 @@ require("theo.autosave") -- loads in autosave
 require("theo.toggleterm") -- loads in terminal
 require("theo.smartcolumn") -- hides/shows column
 require("theo.lualine") -- loads better line
+require("theo.claude_code")

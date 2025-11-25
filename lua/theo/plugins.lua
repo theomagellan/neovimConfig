@@ -28,7 +28,7 @@ vim.pack.add({
   "https://github.com/akinsho/bufferline.nvim", -- cuter tabs
   "https://github.com/akinsho/toggleterm.nvim", -- toggleterm
   "https://github.com/m4xshen/smartcolumn.nvim", -- columns appear/disappear
-  -- lualine
+
   "https://github.com/nvim-lualine/lualine.nvim", -- lualine
 
   -- cmp plugins
@@ -41,7 +41,6 @@ vim.pack.add({
 
   -- LSP
   "https://github.com/neovim/nvim-lspconfig", -- LSP engine
-  "https://github.com/williamboman/mason-lspconfig.nvim", -- LSP installer
   "https://github.com/RishabhRD/lspactions", --better UX
 
   -- snippets
@@ -49,7 +48,6 @@ vim.pack.add({
   "https://github.com/rafamadriz/friendly-snippets", -- a bunch of snippets to use
 
   -- telescope plugins
-  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-telescope/telescope.nvim",
   {src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", name = "fzf-native"},
 
@@ -60,4 +58,7 @@ vim.pack.add({
   -- NvimTree
   "https://github.com/kyazdani42/nvim-tree.lua", -- file explorer
   "https://github.com/kyazdani42/nvim-web-devicons", -- devicons (requires a nerdfont!)
+
+  -- AI stuff
+  "https://github.com/greggh/claude-code.nvim"
 })
