@@ -5,7 +5,7 @@ if not ok then
 end
 
 smartcolumn.setup({
-   colorcolumn = "80",
+   colorcolumn = "120",
    disabled_filetypes = { "help", "text", "markdown" },
    custom_colorcolumn = {},
    scope = "buffer",
