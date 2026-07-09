@@ -52,8 +52,9 @@ vim.pack.add({
   {src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", name = "fzf-native"},
 
   -- treesitter plugins
-  {src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter"}, -- treesitter
-  "https://github.com/HiPhish/rainbow-delimiters.nvim",
+  {src = "https://github.com/neovim-treesitter/nvim-treesitter", version = 'main'}, -- treesitter
+  {src = "https://github.com/neovim-treesitter/treesitter-parser-registry", version = 'main'}, -- treesitter
+  -- "https://github.com/HiPhish/rainbow-delimiters.nvim",
 
   -- NvimTree
   "https://github.com/kyazdani42/nvim-tree.lua", -- file explorer
